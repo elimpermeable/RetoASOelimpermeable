@@ -1,11 +1,11 @@
-# 🧠 Sistema de Gestión de Servidores (Bash)
+# Sistema de Gestión de Servidores 
 
 Este proyecto es un conjunto de scripts Bash que permiten **gestionar, monitorear y respaldar servidores** de manera sencilla desde la terminal.  
 Está dividido en módulos para mantener el código organizado y facilitar su mantenimiento.
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 ├── menu_principal.sh        # Script principal (menú del sistema)
@@ -19,7 +19,7 @@ Está dividido en módulos para mantener el código organizado y facilitar su ma
 
 ---
 
-## 🚀 Uso general
+## Uso general
 
 1. Asegúrate de dar permisos de ejecución a los scripts:
    ```bash
@@ -40,7 +40,7 @@ Está dividido en módulos para mantener el código organizado y facilitar su ma
 
 ---
 
-## 🧩 Descripción de cada script
+## Descripción de cada script
 
 ### 1. **menu_principal.sh**
 Es el **punto de entrada principal** del sistema.  
@@ -133,7 +133,7 @@ servidor_inactivo#192.168.1.100#80#inactivo#Servidor de prueba
 
 ---
 
-## 🛠️ Requisitos
+## Requisitos
 
 - Sistema operativo Linux o macOS.  
 - Bash 4.0 o superior.  
@@ -141,7 +141,7 @@ servidor_inactivo#192.168.1.100#80#inactivo#Servidor de prueba
 
 ---
 
-## 🧹 Recomendaciones
+## Recomendaciones
 
 - Realiza un **backup** antes de modificar el archivo de servidores.  
 - Usa nombres descriptivos para identificar fácilmente cada servidor.  
@@ -149,5 +149,5 @@ servidor_inactivo#192.168.1.100#80#inactivo#Servidor de prueba
 
 ---
 
-## 📜 Licencia
+## Licencia
 Este proyecto puede usarse y modificarse libremente con fines educativos o administrativos.  
