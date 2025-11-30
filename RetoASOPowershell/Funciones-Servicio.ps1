@@ -101,19 +101,6 @@ function Modificar-Seguimiento {
         Write-Host "$i) $line"
         $i++
     }
-
-    $num = Read-Host "Numero del servicio de Interes"
-
-    if ($num -gt 0 -and $num -le $contenido.Count) {
-        $nuevo = Read-Host "Nuevo nombre del servicio"
-
-        $contenido[$num-1] = $nuevo
-        $contenido | Set-Content $SeguimientoFile
-        Write-Host "Servicio modificado correctamente." -ForegroundColor Green
-    }
-    else {
-        Write-Host "Numero no valido." -ForegroundColor Red
-    }
 }
 
 ###############################################################
