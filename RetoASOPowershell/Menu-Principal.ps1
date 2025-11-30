@@ -21,7 +21,7 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "    SISTEMA DE GESTION DE SERVICIOS" -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Fecha actual del sistema: $fecha" -ForegroundColor Yellow
+Write-Host "Bienvenido Administrador...Fecha actual del sistema: $fecha" -ForegroundColor Yellow
 Write-Host ""
 
 do {
