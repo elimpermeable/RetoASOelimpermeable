@@ -15,11 +15,11 @@ function Menu-Servicios {
     Write-Host "    GESTION DE SERVICIOS" -ForegroundColor Green
     Write-Host "==========================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1) Listar servicios"
-    Write-Host "2) Anadir servicio al seguimiento"
-    Write-Host "3) Buscar servicio"
-    Write-Host "4) Modificar seguimiento"
-    Write-Host "5) Eliminar de seguimiento"
+    Write-Host "1) Listar Servicios"
+    Write-Host "2) Anadir Servicios de Interes"
+    Write-Host "3) Consultar Servicio"
+    Write-Host "4) Listar Servicios de Interes"
+    Write-Host "5) Eliminar de Servicios de Interes"
     Write-Host "6) Controlar servicio (Iniciar/Detener)"
     Write-Host "7) Volver al menu principal"
     Write-Host ""
@@ -61,7 +61,7 @@ function Anadir-Seguimiento {
 
     if (Get-Service -Name $serv -ErrorAction SilentlyContinue) {
         Add-Content $SeguimientoFile $serv
-        Write-Host "Servicio anadido al seguimiento." -ForegroundColor Green
+        Write-Host "Añadido como Servicio de Interes." -ForegroundColor Green
     }
     else {
         Write-Host "El servicio no existe." -ForegroundColor Red
@@ -73,7 +73,7 @@ function Anadir-Seguimiento {
 ###############################################################
 
 function Buscar-Servicio {
-    $serv = Read-Host "Introduce el nombre del servicio a buscar"
+    $serv = Read-Host "Introduce el nombre del servicio a consultar"
 
     if (Get-Service -Name $serv -ErrorAction SilentlyContinue) {
         Get-Service -Name $serv | Format-Table Name, Status, DisplayName
@@ -84,25 +84,25 @@ function Buscar-Servicio {
 }
 
 ###############################################################
-# 4) MODIFICAR SEGUIMIENTO
+# 4) LISTAR SERVICIOS DE INTERES
 ###############################################################
 
 function Modificar-Seguimiento {
     $contenido = Get-Content $SeguimientoFile
 
     if ($contenido.Count -eq 0) {
-        Write-Host "No hay servicios en seguimiento." -ForegroundColor Yellow
+        Write-Host "No hay servicios de interes." -ForegroundColor Yellow
         return
     }
 
-    Write-Host "Servicios en seguimiento:"
+    Write-Host "Servicios de Interes:"
     $i = 1
     foreach ($line in $contenido) {
         Write-Host "$i) $line"
         $i++
     }
 
-    $num = Read-Host "Numero del servicio a modificar"
+    $num = Read-Host "Numero del servicio de Interes"
 
     if ($num -gt 0 -and $num -le $contenido.Count) {
         $nuevo = Read-Host "Nuevo nombre del servicio"
@@ -124,11 +124,11 @@ function Eliminar-Seguimiento {
     $contenido = Get-Content $SeguimientoFile
 
     if ($contenido.Count -eq 0) {
-        Write-Host "No hay servicios en seguimiento." -ForegroundColor Yellow
+        Write-Host "No hay Servicios de Interes." -ForegroundColor Yellow
         return
     }
 
-    Write-Host "Servicios en seguimiento:"
+    Write-Host "Servicios de Interes:"
     $i = 1
     foreach ($line in $contenido) {
         Write-Host "$i) $line"
