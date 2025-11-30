@@ -9,7 +9,7 @@ if (-not (Test-Path $BackupDir)) {
 }
 
 # Rutas de archivos importantes
-$ServiciosCSV = "$ScriptDir\servicios-seguimiento.txt"
+$ServiciosCSV = "$ScriptDir\servicios_seguimiento.txt"
 $ConfigCSV = "$ScriptDir\Configuracion.csv"
 
 function Menu-Backup {
