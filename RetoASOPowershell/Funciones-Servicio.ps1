@@ -1,5 +1,4 @@
 # Funciones-Servicio.ps1
-# Sin tildes y con el menu solicitado
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $SeguimientoFile = "$ScriptDir\servicios_seguimiento.txt"
@@ -75,13 +74,27 @@ function Anadir-Seguimiento {
 function Buscar-Servicio {
     $serv = Read-Host "Introduce el nombre del servicio a consultar"
 
-    if (Get-Service -Name $serv -ErrorAction SilentlyContinue) {
-        Get-Service -Name $serv | Format-Table Name, Status, DisplayName
+    # Intentar obtener el servicio
+    $info = Get-WmiObject Win32_Service -Filter "Name='$serv'" -ErrorAction SilentlyContinue
+
+    if ($info) {
+        # Mostrar informacion ampliada
+        $resultado = [PSCustomObject]@{
+            Nombre       = $info.Name
+            DisplayName  = $info.DisplayName
+            Estado       = $info.State
+            TipoInicio   = $info.StartMode
+            Descripcion  = $info.Description
+            PID          = $info.ProcessId
+        }
+
+        $resultado | Format-Table -AutoSize
     }
     else {
         Write-Host "El servicio no existe." -ForegroundColor Red
     }
 }
+
 
 ###############################################################
 # 4) LISTAR SERVICIOS DE INTERES
