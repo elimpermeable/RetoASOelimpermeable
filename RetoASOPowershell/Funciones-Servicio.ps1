@@ -2,7 +2,7 @@
 # Sin tildes y con el menu solicitado
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$SeguimientoFile = "$ScriptDir\servicios_seguimiento.csv"
+$SeguimientoFile = "$ScriptDir\servicios_seguimiento.txt"
 
 # Crear archivo si no existe
 if (-not (Test-Path $SeguimientoFile)) {
