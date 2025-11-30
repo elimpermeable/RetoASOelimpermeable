@@ -1,1 +1,3 @@
-
+Variable,Valor
+LogDir,logs
+BackupDir,backups
