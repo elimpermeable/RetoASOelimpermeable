@@ -1,5 +1,5 @@
 # Menu-Principal.ps1
-# Script principal sin tildes y con plantilla del profesor
+
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
