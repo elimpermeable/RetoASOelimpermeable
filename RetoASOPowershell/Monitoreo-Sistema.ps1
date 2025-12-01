@@ -1,5 +1,5 @@
 # Monitoreo-Sistema.ps1
-# Monitoreo del sistema simple y funcional
+
 
 function Menu-Monitoreo {
     Clear-Host
