@@ -1,5 +1,5 @@
 # Configuracion-Sistema.ps1
-# Muy simple, sin tildes
+
 
 function Menu-Configuracion {
     Clear-Host
