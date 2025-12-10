@@ -121,36 +121,82 @@ function Modificar-Seguimiento {
 ###############################################################
 
 function Eliminar-Seguimiento {
-    # Cargamos SIEMPRE como array
-    $contenido = @(Get-Content $SeguimientoFile)
+    param()
 
-    if ($contenido.Count -eq 0) {
-        Write-Host "No hay Servicios de Interes." -ForegroundColor Yellow
-        return
-    }
+    try {
+        if (-not (Test-Path $SeguimientoFile)) {
+            Write-Host "No existe el archivo de seguimiento: $SeguimientoFile" -ForegroundColor Red
+            return
+        }
 
-    Write-Host "Servicios de Interes:"
-    for ($i = 0; $i -lt $contenido.Count; $i++) {
-        Write-Host "$($i+1)) $($contenido[$i])"
-    }
+        # Leemos y normalizamos todas las lineas; forzamos array aunque haya una sola linea
+        $raw = Get-Content -Path $SeguimientoFile -ErrorAction Stop
+        $lineas = @()
+        foreach ($l in @($raw)) {
+            # eliminar CR/LF y tabs y trim
+            $clean = ($l -replace "`r", "") -replace "`n",""
+            $clean = $clean -replace "`t",""
+            $clean = $clean.Trim()
+            if ($clean -ne "") { $lineas += $clean }
+        }
 
-    $num = Read-Host "Numero del servicio a eliminar"
+        if ($lineas.Count -eq 0) {
+            Write-Host "No hay Servicios de Interes." -ForegroundColor Yellow
+            return
+        }
 
-    if ($num -gt 0 -and $num -le $contenido.Count) {
+        # Mostrar lista numerada
+        Write-Host "Servicios de Interes:" -ForegroundColor Cyan
+        for ($i = 0; $i -lt $lineas.Count; $i++) {
+            Write-Host "$($i+1)) $($lineas[$i])"
+        }
 
-        # Guardamos el valor exacto a eliminar TRIMMED
-        $valorEliminar = ($contenido[$num-1]).Trim()
+        $numInput = Read-Host "Numero del servicio a eliminar"
+        $num = 0
+        if (-not [int]::TryParse($numInput, [ref]$num)) {
+            Write-Host "Debes introducir un numero valido." -ForegroundColor Red
+            return
+        }
 
-        # Filtramos todo EXCEPTO ese valor
-        $nuevoContenido = $contenido | Where-Object { $_.Trim() -ne $valorEliminar }
+        if ($num -lt 1 -or $num -gt $lineas.Count) {
+            Write-Host "Numero fuera de rango." -ForegroundColor Red
+            return
+        }
 
-        # Sobreescribimos el fichero
-        $nuevoContenido | Set-Content $SeguimientoFile
+        $index = $num - 1
+        $valorEliminar = $lineas[$index]
 
-        Write-Host "Servicio eliminado correctamente." -ForegroundColor Green
-    }
-    else {
-        Write-Host "Numero no valido." -ForegroundColor Red
+        # Hacer copia de seguridad antes de modificar (por si acaso)
+        try {
+            $bakName = "$SeguimientoFile.bak_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
+            Copy-Item -Path $SeguimientoFile -Destination $bakName -Force
+        } catch {
+            Write-Host "No se pudo crear copia de seguridad: $_" -ForegroundColor Yellow
+            # no abortamos; seguimos intentando la eliminacion
+        }
+
+        # Construir nuevo array sin la linea en el indice seleccionado
+        $nuevo = New-Object System.Collections.Generic.List[string]
+        for ($i = 0; $i -lt $lineas.Count; $i++) {
+            if ($i -ne $index) { $nuevo.Add($lineas[$i]) }
+        }
+
+        # Escribir fichero con la nueva lista (UTF8)
+        try {
+            # Si la lista queda vacia, creamos el archivo vacio
+            if ($nuevo.Count -eq 0) {
+                # Truncar fichero
+                Set-Content -Path $SeguimientoFile -Value @() -Encoding UTF8
+            } else {
+                Set-Content -Path $SeguimientoFile -Value $nuevo -Encoding UTF8
+            }
+            Write-Host "Servicio '$valorEliminar' eliminado correctamente." -ForegroundColor Green
+        } catch {
+            Write-Host "Error al escribir el archivo: $_" -ForegroundColor Red
+        }
+
+    } catch {
+        Write-Host "Error inesperado: $_" -ForegroundColor Red
     }
 }
 
