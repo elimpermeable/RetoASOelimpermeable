@@ -37,7 +37,7 @@ do {
         "1" { Menu-Servicios }
         "2" { Menu-Monitoreo }
         "3" { Menu-Backup }
-        "4" { Write-Host "Modulo de configuracion (no implementado aun)" -ForegroundColor Yellow }
+        "4" { Menu-Configuracion }
         "5" { Write-Host "Saliendo..." -ForegroundColor Red; break }
         default { Write-Host "Opcion no valida" -ForegroundColor Red }
     }
