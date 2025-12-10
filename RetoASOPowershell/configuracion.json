@@ -1,0 +1,7 @@
+{
+    "SystemName": "MiServidor",
+    "BackupPath": "C:\\Backup",
+    "LogsPath": "C:\\Logs",
+    "MaxBackupCopies": 5,
+    "EnableCompression": true
+}
