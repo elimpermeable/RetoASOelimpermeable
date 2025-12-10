@@ -121,7 +121,7 @@ function Modificar-Seguimiento {
 ###############################################################
 
 function Eliminar-Seguimiento {
-    # FORZAMOS siempre array aunque solo haya una línea
+    # Cargamos SIEMPRE como array
     $contenido = @(Get-Content $SeguimientoFile)
 
     if ($contenido.Count -eq 0) {
@@ -138,10 +138,14 @@ function Eliminar-Seguimiento {
 
     if ($num -gt 0 -and $num -le $contenido.Count) {
 
-        # Eliminamos la línea seleccionada
-        $contenido = $contenido | Where-Object { $_ -ne $contenido[$num-1] }
+        # Guardamos el valor exacto a eliminar TRIMMED
+        $valorEliminar = ($contenido[$num-1]).Trim()
 
-        $contenido | Set-Content $SeguimientoFile
+        # Filtramos todo EXCEPTO ese valor
+        $nuevoContenido = $contenido | Where-Object { $_.Trim() -ne $valorEliminar }
+
+        # Sobreescribimos el fichero
+        $nuevoContenido | Set-Content $SeguimientoFile
 
         Write-Host "Servicio eliminado correctamente." -ForegroundColor Green
     }
