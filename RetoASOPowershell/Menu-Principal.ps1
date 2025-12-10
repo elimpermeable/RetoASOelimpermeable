@@ -54,7 +54,7 @@ do {
         "1" { Menu-Servicios }       # Llama al menú de gestión de servicios
         "2" { Menu-Monitoreo }       # Llama al menú de monitoreo
         "3" { Menu-Backup }          # Llama al menú de backups
-        "4" { Menu-Configuracion }   # Llama al menú de configuración del sistema
+        "4" { Menu-Configuracion }   # Llama al menú de configuración del sistema solo si se selecciona
         "5" { Write-Host "Saliendo..." -ForegroundColor Red; break } # Salir del bucle y terminar el script
         default { Write-Host "Opcion no valida" -ForegroundColor Red } # Si no es opción válida, muestra error
     }
