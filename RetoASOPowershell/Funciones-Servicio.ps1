@@ -123,28 +123,38 @@ function Modificar-Seguimiento {
 function Eliminar-Seguimiento {
     $contenido = Get-Content $SeguimientoFile
 
-    if ($contenido.Count -eq 0) {
+    if (-not $contenido -or $contenido.Count -eq 0) {
         Write-Host "No hay Servicios de Interes." -ForegroundColor Yellow
         return
     }
 
-    Write-Host "Servicios de Interes:"
-    $i = 1
-    foreach ($line in $contenido) {
-        Write-Host "$i) $line"
-        $i++
+    Write-Host "Servicios de Interes:" -ForegroundColor Cyan
+    for ($i=0; $i -lt $contenido.Count; $i++) {
+        Write-Host "$($i+1)) $($contenido[$i])"
     }
 
-    $num = Read-Host "Numero del servicio a eliminar"
+    $numInput = Read-Host "Numero del servicio a eliminar"
+    $num = 0
 
-    if ($num -gt 0 -and $num -le $contenido.Count) {
-        $nuevoContenido = $contenido | Where-Object { $_ -ne $contenido[$num-1] }
-        $nuevoContenido | Set-Content $SeguimientoFile
-        Write-Host "Servicio eliminado." -ForegroundColor Green
+    # Convertir y validar numero
+    if (-not [int]::TryParse($numInput, [ref]$num)) {
+        Write-Host "Debes introducir un numero valido." -ForegroundColor Red
+        return
     }
-    else {
-        Write-Host "Numero no valido." -ForegroundColor Red
+
+    if ($num -lt 1 -or $num -gt $contenido.Count) {
+        Write-Host "Numero fuera de rango." -ForegroundColor Red
+        return
     }
+
+    # Eliminar elemento seleccionado
+    $contenido[$num-1] = $null
+    $nuevoContenido = $contenido | Where-Object { $_ -ne $null }
+
+    # Guardar cambios
+    Set-Content -Path $SeguimientoFile -Value $nuevoContenido
+
+    Write-Host "Servicio eliminado correctamente." -ForegroundColor Green
 }
 
 ###############################################################
