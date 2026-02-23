@@ -11,14 +11,14 @@ Se han creado las instancias necesarias en EC2 para simular el entorno de servid
 
 > **Captura requerida:** Panel de instancias de AWS mostrando las máquinas en ejecución.
 
-![Instancias creadas en AWS](images/aso_aws_instances.png)
+![Instancias creadas en AWS](Imagenes/aso_aws_instances.png)
 
 ### 1.2. Configuración de Red y Seguridad
 Se han configurado los **Security Groups** para permitir el tráfico necesario en los puertos de los servicios (SSH, SMB para Samba, y los puertos RPC/NFS).
 
 > **Captura requerida:** Reglas de entrada (Inbound rules) de los Security Groups configurados.
 
-![Security Groups configurados](images/aso_aws_sg.png)
+![Security Groups configurados](Imagenes/aso_aws_sg.png)
 
 ---
 
