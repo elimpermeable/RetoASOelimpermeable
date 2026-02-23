@@ -43,22 +43,16 @@ El servidor NFS está activo y exportando los directorios configurados.
 ## 3. Pruebas de Conectividad y Acceso
 
 ### 3.1. Acceso desde Cliente Linux
-Verificación de acceso y montaje de los recursos compartidos (tanto Samba como NFS) desde la instancia cliente Linux.
+Se ha verificado el acceso a ambos servicios desde la instancia Linux. En las capturas se observa tanto el montaje exitoso como la creación de los archivos de prueba iniciales para validar permisos de escritura.
 
-> **Captura requerida:** Terminal del cliente Linux mostrando el acceso/montaje a Samba y NFS.
+> **Captura requerida:** Montaje y acceso al recurso compartido **Samba**.
+![Acceso Samba Linux](Imagenes/samba_cliente_linux.png)
 
-![Acceso desde cliente Linux](Imagenes/NFS_cliente_funcionando.png)
+> **Captura requerida:** Montaje y acceso al recurso compartido **NFS**.
+![Acceso NFS Linux](Imagenes/nfs_cliente_linux.png)
 
 ### 3.2. Acceso desde Cliente Windows
-Verificación de acceso al recurso compartido Samba desde la instancia cliente Windows.
+Verificación de acceso al recurso compartido Samba desde la instancia cliente Windows, comprobando la visibilidad y capacidad de edición de los archivos.
 
 > **Captura requerida:** Explorador de archivos o terminal de Windows accediendo al recurso compartido.
-
 ![Acceso desde cliente Windows](Imagenes/samba_windows.png)
-
-### 3.3. Verificación de Escritura (Archivos de prueba)
-Se ha comprobado la capacidad de escritura creando archivos de prueba en los recursos compartidos desde los clientes.
-
-> **Captura requerida:** Listado de archivos mostrando los ficheros de prueba creados en los volúmenes compartidos.
-
-![Prueba Escritura](Imagenes/prueba_escritura.png)
