@@ -40,8 +40,7 @@ El servidor NFS está activo y exportando los directorios configurados.
 > **Captura requerida:** Salida del comando `showmount -e` o `exportfs` mostrando los recursos compartidos.
 
 !NFS exportado
-*(Insertar aquí captura del comando `showmount -e`)*
-
+![ServidorNFS](Imagenes/NFS servidor funcionando.png)
 ---
 
 ## 3. Pruebas de Conectividad y Acceso
