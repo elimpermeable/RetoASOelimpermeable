@@ -46,7 +46,7 @@ El servidor NFS está activo y exportando los directorios configurados.
 Se ha verificado el acceso a ambos servicios desde la instancia Linux. En las capturas se observa tanto el montaje exitoso como la creación de los archivos de prueba iniciales para validar permisos de escritura.
 
 > **Captura requerida:** Montaje y acceso al recurso compartido **Samba**.
-![Acceso Samba Linux](Imagenes/samba_cliente_linux.png)
+![Acceso Samba Linux](Imagenes/sambacliente_linux.png)
 
 > **Captura requerida:** Montaje y acceso al recurso compartido **NFS**.
 ![Acceso NFS Linux](Imagenes/nfs_cliente_linux.png)
